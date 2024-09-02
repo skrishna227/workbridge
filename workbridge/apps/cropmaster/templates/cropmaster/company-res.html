@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block content-header %}
+    {% include 'common/content-header.html' with title="New Registration" subtitle="Company" actiontag="Crop Master" %}
+{% endblock %}
+
+ <!-- Navbar -->
+ {% block navbar %}
+ {% include 'common/navbar.html' %}
+ {% endblock %}
+ <!-- end Navbar -->
+
+ <!-- Left side column. contains the logo and sidebar -->
+ {% block sidebar %}
+ {% include 'common/sidebar.html' %}
+ {% endblock %}
+ <!-- end sidebar -->
+
+{% block content %}
+<!-- left column -->
+<div class="col-md-12">
+    <!-- general form elements -->
+    <div class="box box-primary">
+      <div class="box-header with-border">
+        <h3 class="box-title">Registration Form</h3>
+      </div>
+      <!-- /.box-header -->
+      <!-- form start -->
+      <form role="form" method="POST">
+        {% csrf_token  %}
+        <div class="box-body">
+          <div class="form-group col-md-6">
+            <label>Company Name</label>
+            <input type="text" class="form-control" placeholder="Enter Company Name" name="name">
+          </div>
+          <div class="form-group col-md-6">
+            <label >Website</label>
+            <input type="text" class="form-control" placeholder="Enter Website" name="website">
+          </div>
+
+          <div class="form-group col-md-6">
+            <label >City</label>
+            <input type="text" class="form-control" placeholder="Enter City" name="city">
+          </div>
+          <div class="form-group col-md-6">
+            <label >State</label>
+            <input type="text" class="form-control"  placeholder="Enter State" name="state">
+          </div>
+          <div class="form-group col-md-6">
+            <label >Country</label>
+            <input type="text" class="form-control"  placeholder="Enter Country" name="country">
+          </div>
+          <div class="form-group col-md-6">
+            <label>Postal Code</label>
+            <input type="text" class="form-control"  placeholder="Enter Postal Code" name="postal_code">
+          </div>
+          <div class="form-group col-md-6">
+            <label >Phone Number</label>
+            <input type="text" class="form-control"  placeholder="Enter Phone Number" name="phone_number">
+          </div>
+          <div class="form-group col-md-6">
+            <label >Email</label>
+            <input type="email" class="form-control"  placeholder="Enter Email" name="email">
+          </div>
+          <div class="form-group col-md-12">
+            <label>Address</label>
+            <input type="textarea" class="form-control" placeholder="Enter Address" name="address">
+          </div>
+        </div>
+        <!-- /.box-body -->
+
+        <div class="box-footer">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+    </div>
+    <!-- /.box -->
+  </div>
+{% endblock %}
+
+
+<!-- /.content-wrapper -->
+{% block footer %}
+{% include 'common/footer.html' %}
+{% endblock %}
+
+
+<!-- Control Sidebar -->
+{% block control-sidebar2 %}
+{% include 'common/control-sidebar2.html' %}
+{% endblock %}
+<!-- /.control-sidebar -->

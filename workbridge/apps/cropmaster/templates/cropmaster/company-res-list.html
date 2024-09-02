@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<style>
+  .pagination {
+      text-align: center; /* Center align the pagination controls */
+      margin-bottom: 20px; /* Add some space below the pagination controls */
+  }
+  .pagination ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      display: inline-block; /* Inline block to allow horizontal alignment */
+  }
+  .pagination li {
+      display: inline; /* Display list items horizontally */
+      margin: 0 5px; /* Space between page numbers */
+  }
+  .pagination a {
+      text-decoration: none;
+      color: blue;
+  }
+  .pagination strong {
+      font-weight: bold;
+      color: black;
+  }
+</style>  
+{% endblock %}
+
+{% block content-header %}
+    {% include 'common/content-header.html' with title="Listed" subtitle="Company" actiontag="Crop Master" %}
+{% endblock %}
+
+ <!-- Navbar -->
+ {% block navbar %}
+ {% include 'common/navbar.html' %}
+ {% endblock %}
+ <!-- end Navbar -->
+
+ <!-- Left side column. contains the logo and sidebar -->
+ {% block sidebar %}
+ {% include 'common/sidebar.html' %}
+ {% endblock %}
+ <!-- end sidebar -->
+
+
+{% block content %}
+<div class="col-xs-12">
+    <div class="box">
+      <div class="box-header">
+        <h3 class="box-title">Listed Company</h3>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <table class="table ">
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Website</th>
+            <th>Contact Number</th>
+            <th>Address</th>
+          </tr>
+          </thead>
+          <tbody>
+            {% for dt in company_list_context %}
+            <tr>
+              <td>{{dt.id}}</td>
+              <td>{{dt.name}}</td>
+              <td>{{dt.email}}</td>
+              <td>{{dt.website}}</td>
+              <td>{{dt.phone_number}}</td>
+              <td>{{dt.address}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+          
+        </table>
+        <!-- Pagination Controls -->
+        <div class="pagination">
+          {% if is_paginated %}
+              <ul>
+                  {% if page_obj.has_previous %}
+                      <li><a href="?page=1">&laquo; first</a></li>
+                      <li><a href="?page={{ page_obj.previous_page_number }}">previous</a></li>
+                  {% endif %}
+
+                  {% for num in page_obj.paginator.page_range %}
+                      {% if page_obj.number == num %}
+                          <li><strong>{{ num }}</strong></li>
+                      {% elif num > page_obj.number|add:-3 and num < page_obj.number|add:3 %}
+                          <li><a href="?page={{ num }}">{{ num }}</a></li>
+                      {% endif %}
+                  {% endfor %}
+
+                  {% if page_obj.has_next %}
+                      <li><a href="?page={{ page_obj.next_page_number }}">next</a></li>
+                      <li><a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a></li>
+                  {% endif %}
+              </ul>
+          {% endif %}
+      </div>
+
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+{% endblock %}
+
+<!-- /.content-wrapper -->
+{% block footer %}
+{% include 'common/footer.html' %}
+{% endblock %}
+
+
+<!-- Control Sidebar -->
+{% block control-sidebar2 %}
+{% include 'common/control-sidebar2.html' %}
+{% endblock %}
+<!-- /.control-sidebar -->
+
